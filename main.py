@@ -19,13 +19,17 @@ def show_cars():
     if request.method == 'POST':
         brand = request.form['brand']
         tmp_cars = []
+
         for car in cars:
-            if brand in car['brand']:
+            if brand.lower() in car['brand'].lower():
                 tmp_cars.append(car)
 
-        return render_template('cars/cars.html', 
-         title='Show Cars by Brand', cars=tmp_cars)
-
+        return render_template(
+            'cars/cars.html',
+            title='Show Cars by Brand Page',
+            cars=tmp_cars
+        )
+        
     return render_template('cars/cars.html', 
     title='Show All Cars Page', cars=cars)
 
@@ -89,3 +93,4 @@ def edit_car(id):
   return render_template('cars/edit_car.html',
                          title='Edit Car Page',
                          car=car)
+
